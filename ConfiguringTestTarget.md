@@ -86,7 +86,7 @@ Authorization, and SFTP servers.  Elements shown in brackets "{}" indicate conte
 gbcmdcert_target.conf file.  
 
 	cd /etc/stunnel
-	sudo echo Q | openssl s_client -showcerts -connect {testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain} -CApath /etc/ssl/certs -cert greenbuttonalliance_org_SSL_Cert.crt -key greenbuttonalliance_private_key.pem  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > ~/Desktop/{testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain}.pem
+	sudo echo Q | openssl s_client -showcerts -servername {testAuthorizationServerDomain} -connect {testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain} -CApath /etc/ssl/certs -cert greenbuttonalliance_org_SSL_Cert.crt -key greenbuttonalliance_private_key.pem  | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > ~/Desktop/{testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain}.pem
 	
 	sudo cp ~/Desktop/{testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain}.pem /etc/ssl/certs/{testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain}.pem
 	cd /etc/ssl/certs
@@ -100,7 +100,7 @@ shown in brackets "{}" indicate contents of the gbcmdcert_target.conf file.  Ver
 return code:0 (ok):
 
 	cd /etc/stunnel
-	echo Q | openssl s_client -verify 10 -showcerts -CApath /etc/ssl/certs -cert greenbuttonalliance_org_SSL_Cert.crt -key greenbuttonalliance_private_key.pem -connect {testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain}  
+	echo Q | openssl s_client -verify 10 -showcerts -CApath /etc/ssl/certs -cert greenbuttonalliance_org_SSL_Cert.crt -key greenbuttonalliance_private_key.pem -servername {testAuthorizationServerDomain} -connect {testAuthorizationServerDomain} | {testResourceServerDomain} | {testSFTPServerDomain} | {productionAuthorizationServerDomain} | {productionResourceServerDomain} | {productionSFTPServerDomain}  
 
 Note: If there are any errors listed in the exchange (even if the verify is ok) you may need to check intermediate
 certificates in the chain from the "-showcerts" parameter. If so, you may need to acquire these certificates from

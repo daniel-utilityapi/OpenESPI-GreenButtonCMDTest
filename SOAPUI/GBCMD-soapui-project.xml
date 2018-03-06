@@ -16804,8 +16804,8 @@ strDCCertStoragePath = "/etc/ssl/certs/";
 strAuthServerIP = project.getPropertyValue( "authorizationServerIP" ) + ":" + project.getPropertyValue( "authorizationServerPort" );
 strDCCertName=hostResource + ".pem";
 
-//strCommand="echo Q | openssl s_client -showcerts -connect " + strAuthServerIP + " -CApath /etc/ssl/certs -cert /etc/stunnel/greenbuttonalliance_org_SSL_Cert.crt -key /etc/stunnel/greenbuttonalliance_private_key.pem | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > " + strDCCertStoragePathTmp + strDCCertName;
-strCommand="echo Q | openssl s_client -showcerts -connect " + strAuthServerIP + " -CApath /etc/ssl/certs -cert " + project.getPropertyValue("soapUIPlatformSSLCertificate") + " -key " + project.getPropertyValue("soapUIPlatformSSLPrivateKey") + " | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > " + strDCCertStoragePathTmp + strDCCertName;
+//strCommand="echo Q | openssl s_client -showcerts -connect " + strAuthServerIP + " -servername " + hostResource + " -CApath /etc/ssl/certs -cert /etc/stunnel/greenbuttonalliance_org_SSL_Cert.crt -key /etc/stunnel/greenbuttonalliance_private_key.pem | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > " + strDCCertStoragePathTmp + strDCCertName;
+strCommand="echo Q | openssl s_client -showcerts -connect " + strAuthServerIP + " -servername " + hostResource + " -CApath /etc/ssl/certs -cert " + project.getPropertyValue("soapUIPlatformSSLCertificate") + " -key " + project.getPropertyValue("soapUIPlatformSSLPrivateKey") + " | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > " + strDCCertStoragePathTmp + strDCCertName;
 
 
 tc.setPropertyValue("cmd", strCommand);
